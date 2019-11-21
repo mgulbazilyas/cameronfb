@@ -12,6 +12,9 @@ from DocumentRetrievalModel import DocumentRetrievalModel as DRM
 from ProcessedQuestion import ProcessedQuestion as PQ
 import re
 import sys
+import mysqldata
+
+
 with open('title.pickle','rb') as file:
 	TITLES = pickle.load(file)
 greetPattern = re.compile("^\ *((hi+)|((good\ )?morning|evening|afternoon)|(he((llo)|y+)))\ *$",re.IGNORECASE)
@@ -73,7 +76,8 @@ class Setup:
 		print("Scrolling")
 		for i in range(randint(20,100)):
 			self.driver.execute_script('window.scrollBy(0,2500);')
-			time.sleep(randint(5,25))
+			print("scrolled", i, end='\r', flush=True)
+			time.sleep(randint(5,20))
 		print("Getting data From post")
 		allposts = self.driver.find_elements_by_css_selector('[role="article"][id]')
 		for i in allposts:
@@ -83,8 +87,8 @@ class Setup:
 			text = bs(element.find_element_by_css_selector('[data-testid="post_message"]').get_attribute('innerHTML')).text
 			email = extract_email(text)
 			group_name = self.group_name
-			title,experience,size = get_features(text)
-			if text!='':
+			title, experience, size = get_features(text)
+			if text != '' and title != '':
 				self.post_data.append([group_name,text,email,title,experience,size])
 			return True
 		except:
@@ -133,13 +137,13 @@ def get_features(datasetFile:str):
 
 
 self = Setup()
-
-
-self.crawl_group("https://www.facebook.com/groups/palmayachtcrew/")
-print("Get data Successful")
-#%%
-import mysqldata
 connection = mysqldata.con('')
+groups = connection.get_groups()
+
+for link in groups:
+	self.crawl_group(groups)
+	print("Get data Successful from\t", link)
+#%%
 
 df = pd.DataFrame(self.post_data)
 df.to_excel('data.xlsx',index=False)

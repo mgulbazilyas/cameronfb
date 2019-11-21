@@ -25,7 +25,14 @@ class con:
         )
         print("succesfull")
         self.query = '''insert into `Post Text` (group_name, post,email,title,experience,size) VALUES (%s,%s,%s,%s,%s,%s)'''
+    def get_groups(self):
 
+        query = '''SELECT link FROM seasonli_fbgroup.`groups`'''
+        self.createcon()
+        cur = self.con.cursor()
+        cur.execute(query)
+        results = [i[0] for i in cur.fetchall()]
+        return results
     def addData(self,data,tries=0):
         if tries>3:return False
         group = data[0]
