@@ -146,7 +146,8 @@ connection = mysqldata.con('')
 groups = connection.get_groups()
 
 for link in groups:
-	self.crawl_group(groups)
+
+	self.crawl_group(link)
 	print("Get data Successful from\t", link)
 #%%
 
