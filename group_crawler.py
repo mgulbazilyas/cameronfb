@@ -24,7 +24,7 @@ chrome_options.add_argument('user-data-dir=user_data')
 chrome_options.add_argument("--disable-notifications")
 chrome_options.add_argument("--disable-infobars")
 chrome_options.add_argument("start-maximized")
-# chrome_options.add_argument('headless')
+chrome_options.add_argument('headless')
 # In[2]
 def extract_email(line):
 	try:
