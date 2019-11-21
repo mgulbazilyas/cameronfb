@@ -70,9 +70,11 @@ class Setup:
 		self.driver.get(link)
 		self.group_name = self.driver.find_element_by_css_selector('h1#seo_h1_tag').text
 		# Get All Posts.
-		for i in range(100):
+		print("Scrolling")
+		for i in range(randint(20,100)):
 			self.driver.execute_script('window.scrollBy(0,2500);')
-			time.sleep(10)
+			time.sleep(randint(5,25))
+		print("Getting data From post")
 		allposts = self.driver.find_elements_by_css_selector('[role="article"][id]')
 		for i in allposts:
 			self.crawl_post(i)
@@ -134,12 +136,14 @@ self = Setup()
 
 
 self.crawl_group("https://www.facebook.com/groups/palmayachtcrew/")
+print("Get data Successful")
 #%%
 import mysqldata
 connection = mysqldata.con('')
 
 df = pd.DataFrame(self.post_data)
 df.to_excel('data.xlsx',index=False)
+print("File Saved to Data.xlsx")
 df.to_json('data.json')
 for data in self.post_data:
 	connection.addData(data=data)
