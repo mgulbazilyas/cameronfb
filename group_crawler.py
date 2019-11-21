@@ -20,11 +20,14 @@ with open('title.pickle','rb') as file:
 greetPattern = re.compile("^\ *((hi+)|((good\ )?morning|evening|afternoon)|(he((llo)|y+)))\ *$",re.IGNORECASE)
 
 chrome_options = Options()
+# chrome_options.binary_location = r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
 chrome_options.add_argument('user-data-dir=user_data')
 chrome_options.add_argument("--disable-notifications")
 chrome_options.add_argument("--disable-infobars")
 chrome_options.add_argument("start-maximized")
+chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument('headless')
+chrome_options.add_argument('--disable-dev-shm-usage')
 # In[2]
 def extract_email(line):
 	try:
@@ -45,7 +48,7 @@ class Setup:
 			self.__user = lines[0]
 			self.__passwd = lines[1]
 			self.group_links = lines[2:]
-		self.driver = Chrome(options=chrome_options)
+		self.driver = Chrome(options=chrome_options,)
 		self.driver.set_window_size(1200, 700)
 		self.driver.get("https://www.facebook.com")
 		try:

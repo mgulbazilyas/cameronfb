@@ -32,6 +32,7 @@ class con:
         cur = self.con.cursor()
         cur.execute(query)
         results = [i[0] for i in cur.fetchall()]
+        cur.close()
         return results
     def addData(self,data,tries=0):
         if tries>3:return False
