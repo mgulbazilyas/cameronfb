@@ -24,7 +24,7 @@ chrome_options.add_argument('user-data-dir=user_data')
 chrome_options.add_argument("--disable-notifications")
 chrome_options.add_argument("--disable-infobars")
 chrome_options.add_argument("start-maximized")
-chrome_options.add_argument('headless')
+# chrome_options.add_argument('headless')
 # In[2]
 def extract_email(line):
 	try:
@@ -48,9 +48,11 @@ class Setup:
 		self.driver = Chrome(options=chrome_options)
 		self.driver.set_window_size(1200, 700)
 		self.driver.get("https://www.facebook.com")
-		if self.check_login_needed():
+		try:
 			self.login()
-
+		except Exception as e:
+			print("ALready Logged in")
+			pass
 		self.srchStr = "https://www.facebook.com/search/people/?q={}&epa=SERP_TAB"
 
 	def check_login_needed(self)->bool:
