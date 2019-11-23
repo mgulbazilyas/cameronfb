@@ -20,11 +20,11 @@ class con:
     def createcon(self):
         self.con = mysql.connector.connect(host="162.241.252.209",
                                             user="seasonli_fbuser",
-                                            password="Sara.0506",
-                                            database="seasonli_fbgroup"
+                                            password="facebook1",
+                                            database="seasonli_jobsapi"
         )
         print("succesfull")
-        self.query = '''insert into `Post Text` (group_name, post,email,title,experience,size) VALUES (%s,%s,%s,%s,%s,%s)'''
+        self.query = '''insert into `job_detail` (message,post_time,email_id,post_id,location_id) VALUES (%s,%s,%s,%s,%s)'''
     def get_groups(self):
 
         query = '''SELECT link FROM seasonli_fbgroup.`groups`'''
@@ -46,7 +46,7 @@ class con:
         except: self.createcon();self.addData(data)
         try:
             self.con.commit()
-            cur.execute(self.query, (group,post_text,email,title,experience,size ))
+            cur.execute(self.query, (post_text,datetime.datetime.now(),email,group,1))
             cur.close()
             print("done")
             return True
