@@ -27,7 +27,7 @@ chrome_options.add_argument("--disable-notifications")
 chrome_options.add_argument("--disable-infobars")
 chrome_options.add_argument("start-maximized")
 # chrome_options.add_argument("--no-sandbox")
-chrome_options.add_argument('headless')
+# chrome_options.add_argument('headless')
 # In[2]
 def extract_email(line):
 	try:
@@ -38,11 +38,7 @@ def extract_email(line):
 class Setup:
 
 	def __init__(self,posts):
-		try:
-			with open('data.pickle','rb') as file:
-				self.post_data = pickle.load(file)
-		except:
-			self.post_data = []
+		self.post_data = []
 		with open('logininfo.txt','r') as file:
 			lines = file.readlines()
 			self.__user = lines[0]
@@ -79,8 +75,8 @@ class Setup:
 		self.group_name = self.driver.find_element_by_css_selector('h1#seo_h1_tag').text
 		# Get All Posts.
 		print("Scrolling")
-		for i in range(randint(5,10)):
-			self.driver.execute_script('window.scrollBy(0,2500);')
+		for i in range(randint(15,25)):
+			self.driver.execute_script('window.scrollBy(0,3500);')
 			print("scrolled", i, end='\r', flush=True)
 			time.sleep(randint(5,20))
 		print("Getting data From post")
