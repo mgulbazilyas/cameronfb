@@ -25,9 +25,8 @@ chrome_options.add_argument('user-data-dir=user_data')
 chrome_options.add_argument("--disable-notifications")
 chrome_options.add_argument("--disable-infobars")
 chrome_options.add_argument("start-maximized")
-chrome_options.add_argument("--no-sandbox")
-chrome_options.add_argument('headless')
-chrome_options.add_argument('--disable-dev-shm-usage')
+# chrome_options.add_argument("--no-sandbox")
+# chrome_options.add_argument('headless')
 # In[2]
 def extract_email(line):
 	try:
@@ -37,7 +36,7 @@ def extract_email(line):
 		return ''
 class Setup:
 
-	def __init__(self):
+	def __init__(self,posts):
 		try:
 			with open('data.pickle','rb') as file:
 				self.post_data = pickle.load(file)
@@ -56,8 +55,7 @@ class Setup:
 		except Exception as e:
 			print("ALready Logged in")
 			pass
-		self.srchStr = "https://www.facebook.com/search/people/?q={}&epa=SERP_TAB"
-
+		self.posts = posts
 	def check_login_needed(self)->bool:
 		pass
 	def login(self):
@@ -69,7 +67,8 @@ class Setup:
 		self.driver.find_element_by_xpath('//*[@type="submit"]').click()
 		time.sleep(1)
 
-
+	def add_done(self):
+		pass
 	def action(self):
 		pass
 
@@ -79,17 +78,19 @@ class Setup:
 		self.group_name = self.driver.find_element_by_css_selector('h1#seo_h1_tag').text
 		# Get All Posts.
 		print("Scrolling")
-		for i in range(randint(20,100)):
+		for i in range(randint(5,10)):
 			self.driver.execute_script('window.scrollBy(0,2500);')
 			print("scrolled", i, end='\r', flush=True)
 			time.sleep(randint(5,20))
 		print("Getting data From post")
-		allposts = self.driver.find_elements_by_css_selector('[role="article"][id]')
+		allposts = self.driver.find_elements_by_css_selector('[data-testid="newsFeedStream"] [role="article"][id]')
 		for i in allposts:
 			self.crawl_post(i)
+
 	def crawl_post(self,element):
 		try:
 			text = bs(element.find_element_by_css_selector('[data-testid="post_message"]').get_attribute('innerHTML')).text
+			if text in self.posts: return False
 			email = extract_email(text)
 			group_name = self.group_name
 			title, experience, size = get_features(text)
@@ -141,10 +142,15 @@ def get_features(datasetFile:str):
 # In[3]
 
 
-self = Setup()
 connection = mysqldata.con('')
+connection.createcon()
+cur = connection.con.cursor()
+cur.execute('select message from job_detail')
+x = cur.fetchall()
+x = [i[0] for i in x]
+self = Setup(x)
 groups = connection.get_groups()
-
+#%%
 for link in groups:
 
 	self.crawl_group(link)
