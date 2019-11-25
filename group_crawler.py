@@ -162,7 +162,5 @@ for data in self.post_data:
 	connection.addData(data=data)
 
 #%%
-# End Method
-self.__del__()
 
 #%%
