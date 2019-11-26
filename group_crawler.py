@@ -78,7 +78,7 @@ class Setup:
 		for i in range(randint(5,8)):
 			self.driver.execute_script('window.scrollBy(0,3500);')
 			print("scrolled", i, end='\r', flush=True)
-			time.sleep(randint(5,00))
+			time.sleep(randint(5,10))
 		print("Getting data From post")
 		allposts = self.driver.find_elements_by_css_selector('[data-testid="newsFeedStream"] [role="article"][id]')
 		for i in allposts:
