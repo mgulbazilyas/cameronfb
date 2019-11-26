@@ -24,7 +24,7 @@ class con:
                                             database="seasonli_jobsapi"
         )
         print("succesfull")
-        self.query = '''insert into `job_detail` (message,post_time,email_id,post_id,location_id) VALUES (%s,%s,%s,%s,%s)'''
+        self.query = '''insert into `job_detail_fb_demo` (message,post_time,email_id,post_id,location_id) VALUES (%s,%s,%s,%s,%s)'''
     def get_groups(self):
 
         query = '''SELECT link FROM seasonli_fbgroup.`groups`'''
