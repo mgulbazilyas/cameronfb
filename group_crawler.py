@@ -27,7 +27,7 @@ chrome_options.add_argument("--disable-notifications")
 chrome_options.add_argument("--disable-infobars")
 chrome_options.add_argument("start-maximized")
 # chrome_options.add_argument("--no-sandbox")
-chrome_options.add_argument('headless')
+# chrome_options.add_argument('headless')
 # In[2]
 def extract_email(line):
 	try:
@@ -71,7 +71,7 @@ class Setup:
 
 	def crawl_group(self,link):
 		# test link 	https://www.facebook.com/groups/palmayachtcrew/
-		self.driver.get(link)
+		self.driver.get(link+'?sorting_setting=CHRONOLOGICAL')
 		self.group_name = self.driver.find_element_by_css_selector('h1#seo_h1_tag').text
 		# Get All Posts.
 		print("Scrolling")
@@ -89,10 +89,11 @@ class Setup:
 			text = bs(element.find_element_by_css_selector('[data-testid="post_message"]').get_attribute('innerHTML')).text
 			if text in self.posts: return False
 			email = extract_email(text)
+			if email == '': return False
 			group_name = self.group_name
 			title, experience, size = get_features(text)
-			if text != '' and title != '':
-				self.post_data.append([group_name,text,email,title,experience,size])
+
+			self.post_data.append([group_name,text,email,title,experience,size])
 			return True
 		except:
 			return False
@@ -142,7 +143,7 @@ def get_features(datasetFile:str):
 connection = mysqldata.con('')
 connection.createcon()
 cur = connection.con.cursor()
-cur.execute('select message from job_detail')
+cur.execute('select message from job_detail_fb_demo')
 x = cur.fetchall()
 x = [i[0] for i in x]
 self = Setup(x)
