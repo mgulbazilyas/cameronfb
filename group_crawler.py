@@ -78,7 +78,7 @@ class Setup:
 		for i in range(randint(5,8)):
 			self.driver.execute_script('window.scrollBy(0,3500);')
 			print("scrolled", i, end='\r', flush=True)
-			time.sleep(randint(5,20))
+			time.sleep(randint(5,00))
 		print("Getting data From post")
 		allposts = self.driver.find_elements_by_css_selector('[data-testid="newsFeedStream"] [role="article"][id]')
 		for i in allposts:
@@ -87,9 +87,9 @@ class Setup:
 	def crawl_post(self,element):
 		try:
 			text = bs(element.find_element_by_css_selector('[data-testid="post_message"]').get_attribute('innerHTML')).text
-			if text in self.posts: return False
 			email = extract_email(text)
-			if email == '': return False
+			if email == '' or email in self.posts: return False
+			self.posts.append(email)
 			group_name = self.group_name
 			title, experience, size = get_features(text)
 
@@ -143,7 +143,7 @@ def get_features(datasetFile:str):
 connection = mysqldata.con('')
 connection.createcon()
 cur = connection.con.cursor()
-cur.execute('select message from job_detail_fb_demo')
+cur.execute('select email_id from job_detail')
 x = cur.fetchall()
 x = [i[0] for i in x]
 self = Setup(x)
