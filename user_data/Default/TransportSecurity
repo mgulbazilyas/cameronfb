@@ -1,0 +1,62 @@
+{
+   "+ccWXqaoHJ9hfuXbleKV6FQUrBlyXAJ31BdqjNQJpHs=": {
+      "expiry": 1606235354.17687,
+      "mode": "force-https",
+      "sts_include_subdomains": false,
+      "sts_observed": 1574699354.176874
+   },
+   "+loO+DGmT6DTr59JZFAnGSlBAwPkO5M/R9ec1Sw/9KA=": {
+      "expiry": 1606331161.474053,
+      "mode": "force-https",
+      "sts_include_subdomains": true,
+      "sts_observed": 1574795161.474057
+   },
+   "5EdUoB7YUY9zZV+2DkgVXgho8WUvp+D+6KpeUOhNQIM=": {
+      "expiry": 1606330849.745343,
+      "mode": "force-https",
+      "sts_include_subdomains": false,
+      "sts_observed": 1574794849.745346
+   },
+   "7QzmF0xxCtHTEKYxqWspZY5pl1F0B90+PraFnPulnH8=": {
+      "expiry": 1590350870.163258,
+      "mode": "force-https",
+      "sts_include_subdomains": true,
+      "sts_observed": 1574798870.163261
+   },
+   "8/RrMmQlCD2Gsp14wUCE1P8r7B2C5+yE0+g79IPyRsc=": {
+      "expiry": 1606330849.800722,
+      "mode": "force-https",
+      "sts_include_subdomains": false,
+      "sts_observed": 1574794849.800726
+   },
+   "GXAWKG75gTPpxFVa1WF840zam4hjcr5wvI6FTSCrwVU=": {
+      "expiry": 1606331626.725965,
+      "mode": "force-https",
+      "sts_include_subdomains": true,
+      "sts_observed": 1574795626.72597
+   },
+   "LRqCyOISlXz+jH1XsTGM9uUmJZom99xXj4v7p2smjts=": {
+      "expiry": 1606331463.574982,
+      "mode": "force-https",
+      "sts_include_subdomains": true,
+      "sts_observed": 1574795463.574988
+   },
+   "TZmujbl93Yt3JI8wZ4X/zjkA0WFNGNW44A+o7h4YyHw=": {
+      "expiry": 1590350873.830817,
+      "mode": "force-https",
+      "sts_include_subdomains": false,
+      "sts_observed": 1574798873.83082
+   },
+   "nAuqgR4iEWti7SOdT3UHPl6rmZU/DeaIm38P2O2OkgA=": {
+      "expiry": 1606330852.887454,
+      "mode": "force-https",
+      "sts_include_subdomains": false,
+      "sts_observed": 1574794852.887458
+   },
+   "pghPxF7JCJ2Gzq7EZ78EhQldaD5iM1flRYkGsv/lAjs=": {
+      "expiry": 1590350237.228811,
+      "mode": "force-https",
+      "sts_include_subdomains": false,
+      "sts_observed": 1574798237.228814
+   }
+}

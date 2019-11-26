@@ -140,28 +140,30 @@ def get_features(datasetFile:str):
 # In[3]
 
 
-connection = mysqldata.con('')
-connection.createcon()
-cur = connection.con.cursor()
-cur.execute('select email_id from job_detail')
-x = cur.fetchall()
-x = [i[0] for i in x]
-self = Setup(x)
-groups = connection.get_groups()
-#%%
-for link in groups:
+if __name__ == '__main__':
 
-	self.crawl_group(link)
-	print("Get data Successful from\t", link)
-#%%
+	connection = mysqldata.con('')
+	connection.createcon()
+	cur = connection.con.cursor()
+	cur.execute('select email_id from job_detail')
+	x = cur.fetchall()
+	x = [i[0] for i in x]
+	self = Setup(x)
+	groups = connection.get_groups()
+	#%%
+	for link in groups:
 
-df = pd.DataFrame(self.post_data)
-df.to_excel('data.xlsx',index=False)
-print("File Saved to Data.xlsx")
-df.to_json('data.json')
-for data in self.post_data:
-	connection.addData(data=data)
+		self.crawl_group(link)
+		print("Get data Successful from\t", link)
+	#%%
 
-#%%
+	df = pd.DataFrame(self.post_data)
+	df.to_excel('data.xlsx',index=False)
+	print("File Saved to Data.xlsx")
+	df.to_json('data.json')
+	for data in self.post_data:
+		connection.addData(data=data)
 
-#%%
+	#%%
+
+	#%%
