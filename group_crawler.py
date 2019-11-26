@@ -75,7 +75,7 @@ class Setup:
 		self.group_name = self.driver.find_element_by_css_selector('h1#seo_h1_tag').text
 		# Get All Posts.
 		print("Scrolling")
-		for i in range(randint(15,25)):
+		for i in range(randint(5,8)):
 			self.driver.execute_script('window.scrollBy(0,3500);')
 			print("scrolled", i, end='\r', flush=True)
 			time.sleep(randint(5,20))
